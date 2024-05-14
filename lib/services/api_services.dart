@@ -46,9 +46,14 @@ class ApiServices {
     endPoint = 'movie/popular';
     final url = '$baseUrl$endPoint$key';
 
-    final response = await http.get(Uri.parse(url), headers: {});
+    final response = await http.get(Uri.parse(url), headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTAyYjhjMDMxYzc5NzkwZmU1YzBiNGY5NGZkNzcwZCIsInN1YiI6IjYzMmMxYjAyYmE0ODAyMDA4MTcyNjM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.N1SoB26LWgsA33c-5X0DT5haVOD4CfWfRhwpDu9eGkc'
+    });
+    log('recommed search work');
     if (response.statusCode == 200) {
-      log('success');
+      log('success recommend');
+      //log(response.body);
       return MovieRecommendationsModel.fromJson(jsonDecode(response.body));
     }
     throw Exception('failed to load now playing movies');
@@ -82,11 +87,16 @@ class ApiServices {
     endPoint = 'movie/$movieId/recommendations';
     final url = '$baseUrl$endPoint$key';
 
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(url), headers: {
+      'Authorization':
+      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3NTAyYjhjMDMxYzc5NzkwZmU1YzBiNGY5NGZkNzcwZCIsInN1YiI6IjYzMmMxYjAyYmE0ODAyMDA4MTcyNjM5NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.N1SoB26LWgsA33c-5X0DT5haVOD4CfWfRhwpDu9eGkc'
+    });
+    log('recommed search work');
     if (response.statusCode == 200) {
-      log('success');
+      log('success get recoomed movie');
       return MovieRecommendationsModel.fromJson(jsonDecode(response.body));
     }
+    print('work but isnt 200');
     throw Exception('failed to load  movie details');
   }
 

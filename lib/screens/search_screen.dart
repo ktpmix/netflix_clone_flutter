@@ -42,6 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(searchController.text.isEmpty);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -73,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
               searchController.text.isEmpty
                   ? FutureBuilder<MovieRecommendationsModel>(
                 future: popularMovies,
-                builder: (context, snapshot) {
+                builder: (context, snapshot) { //what is snapshot?
                   if (snapshot.hasData) {
                     var data = snapshot.data?.results;
                     return Column(
@@ -145,10 +146,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   : GridView.builder(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: searchedMovie?.results.length,
+                physics: const NeverScrollableScrollPhysics(), //what is this?
+                itemCount: searchedMovie?.results.length, //Q;for what?
                 gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+                const SliverGridDelegateWithFixedCrossAxisCount( //how we know main is row?
                   crossAxisCount: 3,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 5,
